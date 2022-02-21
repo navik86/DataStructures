@@ -26,8 +26,8 @@ class LinkedList:
         self.head = new_node
 
 
-    # удаляем элемент списка, используя данные как ключ
-    def deleteNode(self, key):
+    # удаляем элемент внутри списка, используя данные как ключ
+    def delete(self, key):
          
         # присваиваем temp ссылку на объект head
         temp = self.head
@@ -195,7 +195,7 @@ if __name__=='__main__':
     my_list.printList()
 
     print('\nУдалим элемент со значением 0:')
-    my_list.deleteNode(0)
+    my_list.delete(0)
     my_list.printList()
 
     print('\nУдаляем последний объект:')

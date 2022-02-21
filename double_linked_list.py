@@ -33,13 +33,12 @@ class DoubleLinkedList(LinkedList):
         self.head = new_node
 
 
-
-
+    # метод добавляет элемент в конец списка
     def append(self, new_data):
 
         # создаем новый элемент списка, указываем знач.
         # его нужно расположить за последним элементом списка
-        new_node = Node(new_data)
+        new_node = DoubleNode(new_data)
 
         # если список пустой делаем новый объект головой
         if self.head is None:
@@ -55,6 +54,10 @@ class DoubleLinkedList(LinkedList):
         last.next = new_node
         new_node.prev = last
 
+
+    # удаляем элемент списка, используя данные как ключ для поиска
+    def delete(self, key):
+        pass
 
 
     # наследуем метод из LinkedList
@@ -85,10 +88,6 @@ if __name__=='__main__':
     d_list.append(6)
     d_list.printList()
 
-    # print('\nУдалим элемент со значением 0:')
-    # my_list.deleteNode(0)
-    # my_list.printList()
-    #
-    # print('\nДобавим 7 в середину списка:')
-    # d_list.insertMiddle()
-    # d_list.printList()
+    print('\nУдалим элемент со значением 0:')
+    d_list.delete(0)
+    d_list.printList()
