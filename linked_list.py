@@ -33,12 +33,11 @@ class LinkedList:
         temp = self.head
  
         # если head содержит удаляемое значение
-        if temp:
-            if temp.data == value:
-                self.head = temp.next
-                temp = None
-                return
- 
+        if temp.data == value:
+            self.head = temp.next
+            temp = None
+            return
+
         # Находим ключ который нужно удалить, отслеживая
         # предыдущий объект
         while temp:
@@ -47,12 +46,12 @@ class LinkedList:
             prev = temp
             temp = temp.next
  
-        # если значения нет в нашем списке
-        if temp == None:
-            return
+        # если список пустой
+        if temp is None:
+            return print('Список пуст')
  
         # отключаем удаляемый объект
-        prev.next = temp.next
+        # prev.next = temp.next
 
 
 
