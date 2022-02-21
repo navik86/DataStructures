@@ -12,10 +12,6 @@ class DoubleNode:
 
 class DoubleLinkedList(LinkedList):
 
-    # наследуем метод из LinkedList
-    # инициализируем пустой двухсвязанный список
-    # def __init__(self):
-    #     self.head = None
 
     # метод добавляет элемент в начало списка
     def push(self, new_data):
@@ -55,20 +51,6 @@ class DoubleLinkedList(LinkedList):
         new_node.prev = last
 
 
-    # удаляем элемент списка, используя данные как ключ для поиска
-    def delete(self, key):
-        pass
-
-
-    # наследуем метод из LinkedList
-    # вывод всех элементов связанного списка (перебор)
-    # def printList(self):
-    #     temp = self.head
-    #     while temp:
-    #         print(temp.data, end=' ')
-    #         temp = temp.next
-
-
 
 
 if __name__=='__main__':
@@ -76,7 +58,7 @@ if __name__=='__main__':
     d_list = DoubleLinkedList()
 
     print('Создадим двухсвязанный список:')
-    for i in range(6):
+    for i in range(5, 12):
         d_list.push(i)
     d_list.printList()
 
@@ -88,6 +70,20 @@ if __name__=='__main__':
     d_list.append(6)
     d_list.printList()
 
-    print('\nУдалим элемент со значением 0:')
-    d_list.delete(0)
+    print('\nУдалим элемент со значением 5:')
+    d_list.delete(5)
     d_list.printList()
+
+    print('\nУдаляем последний объект:')
+    d_list.deleteLastNode()
+    d_list.printList()
+
+    print('\nКол-во элементов в связанном списке:')
+    d_list.len()
+
+    print('Отсортируем по возрастанию наш список:')
+    d_list.my_sort()
+    d_list.printList()
+
+    print('\nЕсть ли элемент со значением 22 в списке :')
+    d_list.search_item(22)

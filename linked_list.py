@@ -27,14 +27,14 @@ class LinkedList:
 
 
     # удаляем элемент внутри списка, используя данные как ключ
-    def delete(self, key):
+    def delete(self, value):
          
         # присваиваем temp ссылку на объект head
         temp = self.head
  
         # если head содержит удаляемое значение
         if temp:
-            if temp.data == key:
+            if temp.data == value:
                 self.head = temp.next
                 temp = None
                 return
@@ -42,7 +42,7 @@ class LinkedList:
         # Находим ключ который нужно удалить, отслеживая
         # предыдущий объект
         while temp:
-            if temp.data == key:
+            if temp.data == value:
                 break
             prev = temp
             temp = temp.next
@@ -53,8 +53,7 @@ class LinkedList:
  
         # отключаем удаляемый объект
         prev.next = temp.next
- 
-        temp = None
+
 
 
     # удаляем последний объект
@@ -161,13 +160,27 @@ class LinkedList:
                     index = index.next
                 current = current.next
 
+    # делаем связанный список итерируемым объектом
+    def iter(self):
+        current = self.head
+        while current:
+            item_val = current.data
+            current = current.next
+            yield item_val
 
-    # вывод всех элементов связанного списка (перебор)
+    # вывод всех элементов связанного списка, исп. iter
     def printList(self):
-        temp = self.head
-        while temp:
-            print(temp.data, end=' ')
-            temp = temp.next   
+        for node in self.iter():
+            print(node, end=' ')
+
+    # проверка наличия элемента по значению
+    def search_item(self, val):
+        counter = 0
+        for node in self.iter():
+            if val == node:
+                return print(f'Элемент со значением {val} найден в цепочке под номером {counter}')
+            counter += 1
+        return print(f'Элемент со значением {val} не найден')
  
 
 
@@ -182,8 +195,8 @@ if __name__=='__main__':
 
     my_list.printList()
 
-    print('\nДобавим 5 в начало списка:')
-    my_list.push(5)
+    print('\nДобавим 10 в начало списка:')
+    my_list.push(10)
     my_list.printList()
 
     print('\nДобавим 6 в конец списка:')
@@ -194,8 +207,8 @@ if __name__=='__main__':
     my_list.insertMiddle(7)
     my_list.printList()
 
-    print('\nУдалим элемент со значением 0:')
-    my_list.delete(0)
+    print('\nУдалим элемент со значением 10:')
+    my_list.delete(10)
     my_list.printList()
 
     print('\nУдаляем последний объект:')
@@ -209,4 +222,5 @@ if __name__=='__main__':
     my_list.my_sort()
     my_list.printList()
 
-
+    print('\nЕсть ли элемент со значением 22 в списке :')
+    my_list.search_item(22)
