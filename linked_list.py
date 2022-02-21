@@ -75,25 +75,22 @@ class LinkedList:
     # метод добавляет элемент в середину списка
     def insertMiddle(self, data):
 
-        if self.head is None:  # if the list is empty
+        if self.head is None:  # если список пуст
             self.head = Node(data)
         else:
 
-            # create a new node for the value
-            # to be inserted
+            # создаем новый элемент списка, указываем знач.
             new_node = Node(data)
 
             ptr = self.head
             length = 0
 
-            # calculate the length of the linked
-            # list
-            while ptr is not None:
+            # подсчитываем длину списка
+            while ptr:
                 ptr = ptr.next
                 length += 1
 
-            # 'count' the number of node after which
-            # the new node has to be inserted
+            # считаем номер узла после которого нужно вставить
             if length % 2 == 0:
                 count = length / 2
             else:
@@ -101,14 +98,12 @@ class LinkedList:
 
             ptr = self.head
 
-            # move ptr to the node after which
-            # the new node has to inserted
+            # перемещаем позицию на нужный номер
             while count > 1:
                 count -= 1
                 ptr = ptr.next
 
-            # insert the 'newNode' and adjust
-            # links accordingly
+            # вставляем новый элемент, переписываем ссылки
             new_node.next = ptr.next
             ptr.next = new_node
  
@@ -145,25 +140,29 @@ class LinkedList:
 
 
     # сортировка элементов по значению по возрастанию
+    # сортировка выполена пузырьком
     def my_sort(self):
         current = self.head
         index = None
 
-        if self.head is None:
+        if self.head is None:   # если список пуст
             return
         else:
-            while current is not None:
+            while current:
+                # index привязываем к объекту, след. за головой
                 index = current.next
-                while index is not None:
+                while index:
+                    # если 1-го больше 2-го, меняем местами
                     if current.data > index.data:
                         temp = current.data
                         current.data = index.data
                         index.data = temp
+                    # если все ок, переходи к следующей паре
                     index = index.next
                 current = current.next
 
 
-    # вывод всех элементов связанного списка
+    # вывод всех элементов связанного списка (перебор)
     def printList(self):
         temp = self.head
         while temp:
