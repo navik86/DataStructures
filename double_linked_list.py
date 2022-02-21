@@ -1,4 +1,7 @@
-class Node:
+from linked_list import *
+
+
+class DoubleNode:
 
     # инициализируем у экземпляра атрибуты
     def __init__(self, data):
@@ -7,21 +10,22 @@ class Node:
         self.prev = None  # ссылка на пред. узел
 
 
-class DoubleLinkedList:
+class DoubleLinkedList(LinkedList):
 
+    # наследуем метод из LinkedList
     # инициализируем пустой двухсвязанный список
-    def __init__(self):
-        self.head = None
+    # def __init__(self):
+    #     self.head = None
 
     # метод добавляет элемент в начало списка
     def push(self, new_data):
         # создаем новый элемент списка, указываем знач.
-        new_node = Node(new_data)
+        new_node = DoubleNode(new_data)
 
         # ссылку даем на существующий объект head
         new_node.next = self.head
 
-        # если head не None:
+        # если список не пустой:
         if self.head:
             self.head.prev = new_node
 
@@ -51,34 +55,40 @@ class DoubleLinkedList:
         last.next = new_node
         new_node.prev = last
 
-        return
 
 
-
+    # наследуем метод из LinkedList
     # вывод всех элементов связанного списка (перебор)
-    def printList(self):
-        temp = self.head
-        while temp:
-            print(temp.data, end=' ')
-            temp = temp.next
+    # def printList(self):
+    #     temp = self.head
+    #     while temp:
+    #         print(temp.data, end=' ')
+    #         temp = temp.next
 
 
 
 
 if __name__=='__main__':
 
-    my_list = DoubleLinkedList()
+    d_list = DoubleLinkedList()
 
     print('Создадим двухсвязанный список:')
     for i in range(6):
-        my_list.push(i)
-
-    my_list.printList()
+        d_list.push(i)
+    d_list.printList()
 
     print('\nДобавим 5 в начало списка:')
-    my_list.push(5)
-    my_list.printList()
+    d_list.push(5)
+    d_list.printList()
 
     print('\nДобавим 6 в конец списка:')
-    my_list.append(6)
-    my_list.printList()
+    d_list.append(6)
+    d_list.printList()
+
+    # print('\nУдалим элемент со значением 0:')
+    # my_list.deleteNode(0)
+    # my_list.printList()
+    #
+    # print('\nДобавим 7 в середину списка:')
+    # d_list.insertMiddle()
+    # d_list.printList()

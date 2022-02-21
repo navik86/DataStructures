@@ -8,7 +8,7 @@ class Node:
 
 class LinkedList:
  
-    # инициализируем связанный список
+    # инициализируем пустой связанный список
     def __init__(self):
         self.head = None
  
@@ -79,7 +79,6 @@ class LinkedList:
         if self.head is None:  # если список пуст
             self.head = Node(data)
         else:
-
             # создаем новый элемент списка, указываем знач.
             new_node = Node(data)
 
@@ -127,7 +126,7 @@ class LinkedList:
             last = last.next
  
         # последний модуль ссылается на недавносозданный
-        last.next =  new_node
+        last.next = new_node
  
 
     # кол-во элементов в списке
