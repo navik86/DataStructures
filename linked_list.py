@@ -33,7 +33,7 @@ class LinkedList:
         temp = self.head
  
         # если head содержит удаляемое значение
-        if temp is not None:
+        if temp:
             if temp.data == key:
                 self.head = temp.next
                 temp = None
@@ -41,7 +41,7 @@ class LinkedList:
  
         # Находим ключ который нужно удалить, отслеживая
         # предыдущий объект
-        while temp is not None:
+        while temp:
             if temp.data == key:
                 break
             prev = temp
@@ -60,15 +60,17 @@ class LinkedList:
     # удаляем последний объект
     def deleteLastNode(self):
 
-            if self.head is None:
-                return None
-            if self.head.next is None:
-                self.head = None
-                return None
-            second_last = self.head
-            while second_last.next.next:
-                second_last = second_last.next
-            second_last.next = None
+        # если список пустой
+        if self.head is None:
+            return None
+        # если список содержит только один элемент
+        if self.head.next is None:
+            self.head = None
+            return None
+        second_last = self.head
+        while second_last.next.next:
+            second_last = second_last.next
+        second_last.next = None
 
 
     # метод добавляет элемент в середину списка

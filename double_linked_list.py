@@ -31,6 +31,29 @@ class DoubleLinkedList:
 
 
 
+    def append(self, new_data):
+
+        # создаем новый элемент списка, указываем знач.
+        # его нужно расположить за последним элементом списка
+        new_node = Node(new_data)
+
+        # если список пустой делаем новый объект головой
+        if self.head is None:
+            self.head = new_node
+            return
+
+        # делаем проход до последнего узла
+        last = self.head
+        while last.next:
+            last = last.next
+
+        # меняем ссылки next prev
+        last.next = new_node
+        new_node.prev = last
+
+        return
+
+
 
     # вывод всех элементов связанного списка (перебор)
     def printList(self):
@@ -50,4 +73,12 @@ if __name__=='__main__':
     for i in range(6):
         my_list.push(i)
 
+    my_list.printList()
+
+    print('\nДобавим 5 в начало списка:')
+    my_list.push(5)
+    my_list.printList()
+
+    print('\nДобавим 6 в конец списка:')
+    my_list.append(6)
     my_list.printList()
