@@ -96,7 +96,8 @@ class DoubleLinkedList(LinkedList):
         prev.next = temp.next
 
 
-
+a = {1: 2}
+a[]
 
 
 if __name__=='__main__':
