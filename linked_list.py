@@ -48,21 +48,86 @@ def create_array():
 
 
 def push_back(ll, pair):
-    ll.append(pair)
-    # Привязка ссылки
+    if ll.head is None:
+        ll.head = ll.tail = pair
+    elif pair_second(ll.head) is None:
+        pair_second(ll.head) = ll.tail
+        ll.tail = pair
+    else:
+        pair_second(ll.tail) = pair
+        ll.tail = pair
     return ll
 
 
 def push_front(ll, pair):
-    ll.insert(0, pair)
-    # Привязка ссылки
+    if ll.head is None:
+        ll.head = ll.tail = pair
+    elif len(ll) == 1:
+        pair_second(ll.head) = ll.tail
+        ll.head = pair
+    else:
+        pair_second(pair)= ll.head
+        ll.head = pair
+    return ll
+
+
+def pop_back(ll):
+    if ll.head is None:
+        return
+    elif len(ll) == 1:
+        ll.head = ll.tail = None
+    else:
+        current = ll.head
+        while pair_second(current) != ll.tail:
+            current = current.next
+        pair_second(current) = None
+        ll.tail = current
+    return ll
+
+
+def pop_front(ll):
+    return ll
+
+
+def swap_pair(ll, x, y):
+    return ll
+
+
+def iter_ll(ll):
+    current = ll.head
+    while current:
+        item_val = pair_first(current)
+        current = pair_second(current)
+        yield item_val
+
+
+def print_list(ll):
+    for node in iter_ll(ll):
+        print(node, end=' ')
+
+
+def my_sort(ll):
     return ll
 
 
 if __name__ == '__main__':
 
-    # Какие-то данные
-    some_data = {'obj1': 'Ivan', 'obj2': 23423, 'obj3': {}, 'obj4': None}
+    # Просто данные для заполнения, который
+    # Объекты first
+    list_f = [create_first(f'f{i}') for i in range(1, 5)]
+    # list_s = [create_second(f's{i}') for i in range(1, 5)]
+
+    # Создаем pairs
+    list_p = [create_pair() for i in range(1, 5)]
+
+    # Добавляем объекты в пары
+    for i in range(4):
+        set_first(list_p[i], list_f[i])
+        # set_second(list_p[i], list_s[i])
+
+    my_ll = create_ll(create_array())
+    push_front(my_ll, list_p[0])
+
 
 
 
