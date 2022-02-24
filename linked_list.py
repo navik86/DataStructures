@@ -71,11 +71,32 @@ def push_back(ll, new_pair):
     return ll
 
 
-def pop_back(ll):
+def pop_front(ll):
+    if ll.head is None:
+        return
+    elif ll.counter == 1:
+        ll.head = ll.tail = None
+    elif ll.counter == 2:
+        ll.head = None
+    else:
+        ll.head = pair_second(ll.head)
+    ll.counter -= 1
     return ll
 
 
-def pop_front(ll):
+def pop_back(ll):
+    if ll.head is None:
+        return
+    elif ll.counter == 1:
+        ll.head = ll.tail = None
+    elif ll.counter == 2:
+        ll.tail = None
+    else:
+        current = ll.head
+        while pair_second(pair_second(current)):
+            current = pair_second(current)
+        pair_second(current)
+    ll.counter -= 1
     return ll
 
 
