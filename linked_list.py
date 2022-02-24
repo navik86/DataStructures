@@ -35,6 +35,7 @@ def create_second(obj):
 
 # Создаем связанный список из какой-то коллекции
 def create_ll(array):
+    global ll
     ll = array
     return ll
 
@@ -47,42 +48,44 @@ def create_array():
     return array
 
 
-def push_back(ll, pair):
-    if ll.head is None:
-        ll.head = ll.tail = pair
-    elif pair_second(ll.head) is None:
-        pair_second(ll.head) = ll.tail
-        ll.tail = pair
-    else:
-        pair_second(ll.tail) = pair
-        ll.tail = pair
-    return ll
-
-
 def push_front(ll, pair):
+    psh = pair_second(ll.head)
+    psp = pair_second(pair)
     if ll.head is None:
         ll.head = ll.tail = pair
-    elif len(ll) == 1:
-        pair_second(ll.head) = ll.tail
+    elif psh == 1:
+        psh = ll.tail
         ll.head = pair
     else:
-        pair_second(pair)= ll.head
+        psp = ll.head
         ll.head = pair
     return ll
 
 
-def pop_back(ll):
-    if ll.head is None:
-        return
-    elif len(ll) == 1:
-        ll.head = ll.tail = None
-    else:
-        current = ll.head
-        while pair_second(current) != ll.tail:
-            current = current.next
-        pair_second(current) = None
-        ll.tail = current
-    return ll
+# def push_back(ll, pair):
+#     if ll.head is None:
+#         ll.head = ll.tail = pair
+#     elif psh is None:
+#         psh = ll.tail
+#         ll.tail = pair
+#     else:
+#         psp = pair
+#         ll.tail = pair
+#     return ll
+
+
+# def pop_back(ll):
+#     if ll.head is None:
+#         return
+#     elif len(ll) == 1:
+#         ll.head = ll.tail = None
+#     else:
+#         current = ll.head
+#         while pair_second(current) != ll.tail:
+#             current = current.next
+#         pair_second(current) = None
+#         ll.tail = current
+#     return ll
 
 
 def pop_front(ll):
@@ -128,7 +131,7 @@ if __name__ == '__main__':
     my_ll = create_ll(create_array())
     push_front(my_ll, list_p[0])
 
-
+    print_list(my_ll)
 
 
 
