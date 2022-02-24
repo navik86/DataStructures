@@ -35,7 +35,6 @@ def create_second(obj):
 
 # Создаем связанный список из какой-то коллекции
 def create_ll(array):
-    global ll
     ll = array
     return ll
 
@@ -43,49 +42,30 @@ def create_ll(array):
 # Пользовательская коллекция с доп. атрибутами
 def create_array():
     array = UserList()
-    setattr(array, 'head', 'None')
-    setattr(array, 'tail', 'None')
+    array.head = None
+    array.tail = None
     return array
 
 
-def push_front(ll, pair):
-    psh = pair_second(ll.head)
-    psp = pair_second(pair)
+def push_front(ll, new_pair):
     if ll.head is None:
-        ll.head = ll.tail = pair
-    elif psh == 1:
-        psh = ll.tail
-        ll.head = pair
+        ll.head = ll.tail = new_pair
+        return
+    if pair_second(ll.head) is None:
+        ll.head = new_pair
+        set_second(ll.head, ll.tail)
     else:
-        psp = ll.head
-        ll.head = pair
+        set_second(new_pair, ll.head)
+        ll.head = new_pair
     return ll
 
 
-# def push_back(ll, pair):
-#     if ll.head is None:
-#         ll.head = ll.tail = pair
-#     elif psh is None:
-#         psh = ll.tail
-#         ll.tail = pair
-#     else:
-#         psp = pair
-#         ll.tail = pair
-#     return ll
+def push_back(ll, pair):
+    return ll
 
 
-# def pop_back(ll):
-#     if ll.head is None:
-#         return
-#     elif len(ll) == 1:
-#         ll.head = ll.tail = None
-#     else:
-#         current = ll.head
-#         while pair_second(current) != ll.tail:
-#             current = current.next
-#         pair_second(current) = None
-#         ll.tail = current
-#     return ll
+def pop_back(ll):
+    return ll
 
 
 def pop_front(ll):
@@ -115,23 +95,19 @@ def my_sort(ll):
 
 if __name__ == '__main__':
 
-    # Просто данные для заполнения, который
-    # Объекты first
-    list_f = [create_first(f'f{i}') for i in range(1, 5)]
-    # list_s = [create_second(f's{i}') for i in range(1, 5)]
-
-    # Создаем pairs
-    list_p = [create_pair() for i in range(1, 5)]
-
-    # Добавляем объекты в пары
-    for i in range(4):
-        set_first(list_p[i], list_f[i])
-        # set_second(list_p[i], list_s[i])
+    cf = create_first('f1')
+    cf2 = create_first('f2')
+    cf3 = create_first('f3')
+    cs = create_second(None)
+    cp = create_pair(cf, cs)
+    cp2 = create_pair(cf2, cs)
+    cp3 = create_pair(cf3, cs)
 
     my_ll = create_ll(create_array())
-    push_front(my_ll, list_p[0])
+    push_front(my_ll, cp)
+    push_front(my_ll, cp2)
+    push_front(my_ll, cp3)
 
     print_list(my_ll)
-
 
 
