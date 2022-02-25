@@ -95,12 +95,8 @@ def pop_back(ll):
         current = ll.head
         while pair_second(pair_second(current)):
             current = pair_second(current)
-        pair_second(current)
+        set_second(current, None)
     ll.counter -= 1
-    return ll
-
-
-def swap_pair(ll, x, y):
     return ll
 
 
@@ -112,20 +108,24 @@ def iter_ll(ll):
         yield item_val
 
 
-def print_list(ll):
-    for node in iter_ll(ll):
-        print(node, end=' ')
-
-
 # def print_list(ll):
-#     current = ll.head
-#     last = None
-#     while last != ll.head:
-#         while pair_second(current) != last:
-#             current = pair_second(current)
-#         last = current
-#         print(last)
-#         current = ll.head
+#     for node in iter_ll(ll):
+#         print(node, end=' ')
+
+
+def print_list(ll):
+    current = ll.head
+    last = None
+    while last != ll.head:
+        while pair_second(current) != last:
+            current = pair_second(current)
+        last = current
+        print(last)
+        current = ll.head
+
+
+def swap_pair(ll, x, y):
+    return ll
 
 
 def my_sort(ll):
@@ -149,6 +149,10 @@ if __name__ == '__main__':
     push_front(my_ll, cp2)
     push_front(my_ll, cp3)
     push_back(my_ll, cp4)
+
+    print_list(my_ll)
+    # print('Убрать последний')
+    pop_back(my_ll)
 
     print_list(my_ll)
 
