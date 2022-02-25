@@ -124,6 +124,7 @@ def print_list(ll):
         current = ll.head
 
 
+# x, y - значения ноды
 def swap_pair(ll, x, y):
     if ll.counter == 0 or ll.counter == 1:
         return
@@ -137,30 +138,36 @@ def swap_pair(ll, x, y):
 
 
 def my_sort(ll):
+
     current = ll.head
     index = None
 
     if ll.counter == 0 or ll.counter == 1:
         return
+
+    try:
+        if ll.counter > 1:
+            while current:
+                index = pair_second(current)
+                while index:
+                    if pair_first(current) > pair_first(index):
+                        temp = pair_first(current)
+                        set_first(current, pair_first(index))
+                        set_first(index, temp)
+                    index = pair_second(index)
+                current = pair_second(current)
+    except TypeError:
+        print('Node does not have int or string')
     else:
-        while current:
-            index = pair_second(current)
-            while index:
-                if pair_first(current) > pair_first(index):
-                    temp = pair_first(current)
-                    set_first(current, pair_first(index))
-                    set_first(index, temp)
-                index = pair_second(index)
-            current = pair_second(current)
-    return ll
+        return ll
 
 
 if __name__ == '__main__':
 
-    cf = create_first(1)
-    cf2 = create_first(2)
-    cf3 = create_first(3)
-    cf4 = create_first(4)
+    cf = create_first('f1')
+    cf2 = create_first('f2')
+    cf3 = create_first('f3')
+    cf4 = create_first('f4')
     cs = create_second(None)
     cp = create_pair(cf, cs)
     cp2 = create_pair(cf2, cs)
