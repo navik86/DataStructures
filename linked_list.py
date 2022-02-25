@@ -125,19 +125,42 @@ def print_list(ll):
 
 
 def swap_pair(ll, x, y):
+    if ll.counter == 0 or ll.counter == 1:
+        return
+    elif x == ll.head and y == ll.tail:
+        pass
+    elif x == ll.tail and y == ll.head:
+        pass
+    else:
+        pass
     return ll
 
 
 def my_sort(ll):
+    current = ll.head
+    index = None
+
+    if ll.counter == 0 or ll.counter == 1:
+        return
+    else:
+        while current:
+            index = pair_second(current)
+            while index:
+                if pair_first(current) > pair_first(index):
+                    temp = pair_first(current)
+                    set_first(current, pair_first(index))
+                    set_first(index, temp)
+                index = pair_second(index)
+            current = pair_second(current)
     return ll
 
 
 if __name__ == '__main__':
 
-    cf = create_first('f1')
-    cf2 = create_first('f2')
-    cf3 = create_first('f3')
-    cf4 = create_first('f4')
+    cf = create_first(1)
+    cf2 = create_first(2)
+    cf3 = create_first(3)
+    cf4 = create_first(4)
     cs = create_second(None)
     cp = create_pair(cf, cs)
     cp2 = create_pair(cf2, cs)
@@ -150,10 +173,12 @@ if __name__ == '__main__':
     push_front(my_ll, cp3)
     push_back(my_ll, cp4)
 
-    print_list(my_ll)
     # print('Убрать последний')
-    pop_back(my_ll)
+    # pop_back(my_ll)
 
     print_list(my_ll)
 
+    my_sort(my_ll)
+
+    print_list(my_ll)
 
