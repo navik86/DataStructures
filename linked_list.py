@@ -1,131 +1,85 @@
 from obj_pair import *
 
+
 # push, pop, append, prepend, (insert, delete, get) - по позиции
 class LinkedList:
     def __init__(self):
         self.head = None
         self.last = None
-        # self.counter = 0
+        self.counter = 0
 
     def push(self, item):
         new_pair = create_pair(item)
         if self.head is None:
-            self.head = self.tail = new_pair
+            self.head = self.last = new_pair
         elif pair_second(self.head) is None:
             self.head = new_pair
-            set_second(self.head, self.tail)
+            set_second(self.head, self.last)
         else:
             set_second(new_pair, self.head)
             self.head = new_pair
-        # self.counter += 1
+        self.counter += 1
         return self
 
+    def append(self, item):
+        new_pair = create_pair(item)
+        if self.head is None:
+            self.head = self.last = new_pair
+        else:
+            set_second(self.last, new_pair)
+            self.last = new_pair
+        self.counter += 1
+        return self
 
-    # def push_back(ll, new_pair):
-    #     if ll.head is None:
-    #         ll.head = ll.tail = new_pair
-    #     else:
-    #         set_second(ll.tail, new_pair)
-    #         ll.tail = new_pair
-    #     ll.counter += 1
-    #     return ll
-    #
-    #
-    # def pop_front(ll):
-    #     if ll.head is None:
-    #         return
-    #     elif ll.counter == 1:
-    #         ll.head = ll.tail = None
-    #     elif ll.counter == 2:
-    #         ll.head = None
-    #     else:
-    #         ll.head = pair_second(ll.head)
-    #     ll.counter -= 1
-    #     return ll
-    #
-    #
-    # def pop_back(ll):
-    #     if ll.head is None:
-    #         return
-    #     elif ll.counter == 1:
-    #         ll.head = ll.tail = None
-    #     elif ll.counter == 2:
-    #         ll.tail = None
-    #     else:
-    #         current = ll.head
-    #         while pair_second(pair_second(current)):
-    #             current = pair_second(current)
-    #         set_second(current, None)
-    #     ll.counter -= 1
-    #     return ll
-    #
-    #
-    # def iter_ll(ll):
-    #     current = ll.head
-    #     while current:
-    #         item_val = current
-    #         current = pair_second(current)
-    #         yield item_val
+    def remove(self):
+        if self.head is None:
+            return
+        elif self.counter == 1:
+            self.head = self.last = None
+        elif self.counter == 2:
+            self.head = None
+        else:
+            self.head = pair_second(self.head)
+        self.counter -= 1
+        return self
 
+    def pop(self):
+        if self.head is None:
+            return
+        elif self.counter == 1:
+            self.head = self.last = None
+        elif self.counter == 2:
+            self.last = None
+        else:
+            current = self.head
+            while pair_second(pair_second(current)):
+                current = pair_second(current)
+            set_second(current, None)
+        self.counter -= 1
+        return self
 
-    # def print_list(ll):
-    #     for node in iter_ll(ll):
-    #         print(node, end=' ')
+    def iter_ll(self):
+        current = self.head
+        while current:
+            item_val = current
+            current = pair_second(current)
+            yield item_val
 
-
-    # def print_list(ll):
-    #     current = ll.head
-    #     last = None
-    #     while last != ll.head:
-    #         while pair_second(current) != last:
-    #             current = pair_second(current)
-    #         last = current
-    #         print(last)
-    #         current = ll.head
-    #
-    #
-    # # x, y - значения ноды
-    # def swap_pair(ll, x, y):
-    #     if ll.counter == 0 or ll.counter == 1:
-    #         return
-    #     elif x == ll.head and y == ll.tail:
-    #         pass
-    #     elif x == ll.tail and y == ll.head:
-    #         pass
-    #     else:
-    #         pass
-    #     return ll
-    #
-    #
-    # def my_sort(ll):
-    #
-    #     current = ll.head
-    #     index = None
-    #
-    #     if ll.counter == 0 or ll.counter == 1:
-    #         return
-    #
-    #     try:
-    #         if ll.counter > 1:
-    #             while current:
-    #                 index = pair_second(current)
-    #                 while index:
-    #                     if pair_first(current) > pair_first(index):
-    #                         temp = pair_first(current)
-    #                         set_first(current, pair_first(index))
-    #                         set_first(index, temp)
-    #                     index = pair_second(index)
-    #                 current = pair_second(current)
-    #     except TypeError:
-    #         print('Node does not have int or string')
-    #     else:
-    #         return ll
+    def print_list(self):
+        current = self.head
+        last = None
+        while last != self.head:
+            while pair_second(current) != last:
+                current = pair_second(current)
+            last = current
+            print(last)
+            current = self.head
 
 
 if __name__ == '__main__':
 
-    ll = LinkedList()
-    ll.push_front(1)
+    self = LinkedList()
+    self.push(1)
 
 
     # cf = create_first('f1')

@@ -22,8 +22,3 @@ def set_first(pair, first):
 
 def set_second(pair, second):
     pair.b = second
-
-
-if __name__ == '__main__':
-
-    p = Pair()
