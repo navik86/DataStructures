@@ -6,6 +6,9 @@ class DoublePair:
         self.data = data
         self.ref = ref
 
+    def __str__(self):
+        return f"{self.data}"
+
 
 def create_dp(data):
     a = create_pair(data)
@@ -46,12 +49,12 @@ def set_ref_pair(double_pair, ref):
 
 # [... , ...] -> [prev , ...]
 def set_prev(double_pair, prev):
-    set_second(double_pair.ref, prev)
+    set_first(double_pair.ref, prev)
 
 
 # [... , ...] -> [... , next]
 def set_next(double_pair, next):
-    set_first(double_pair.ref, next)
+    set_second(double_pair.ref, next)
 
 
 if __name__ == '__main__':

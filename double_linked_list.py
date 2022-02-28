@@ -9,7 +9,7 @@ class DoubleLinkedList:
 
     def push(self, item):
         new_pair = create_dp(item)
-        if self.head is None:
+        if self.counter == 0:
             self.head = self.last = new_pair
         elif get_next(self.head) is None:
             self.head = new_pair
@@ -17,11 +17,11 @@ class DoubleLinkedList:
             set_prev(self.last, self.head)
         else:
             set_next(new_pair, self.head)
-            set_prev(self.head, new_pair)
+            self.head = new_pair
         self.counter += 1
         return self
 
-    def print_list(self):
+    def print_dll(self):
         if self.counter == 0:
             return
         current = self.head
@@ -36,8 +36,5 @@ if __name__ == '__main__':
     dll.push(1)
     dll.push(2)
     dll.push(3)
-    dll.push(4)
 
-
-
-    dll.print_list()
+    dll.print_dll()
