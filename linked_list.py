@@ -1,4 +1,4 @@
-from pair import *
+from obj_pair import *
 
 
 # push, pop, append, prepend, (insert, delete, get) - по позиции
@@ -20,6 +20,11 @@ class LinkedList:
             set_second(new_pair, self.head)
             self.head = new_pair
         self.counter += 1
+        return self
+
+    # Добавление элемента в начало
+    def prepend(self, item):
+        self.push(item)
         return self
 
     # Добавление элемента в конец
@@ -115,10 +120,12 @@ class LinkedList:
             self.last = self.head
         elif position == self.counter:
             self.pop()
+        elif position == 1:
+            self.remove()
         else:
             current = self.head
             prev = self.head
-            while position:
+            while position-1:
                 position -= 1
                 prev = current
                 current = pair_second(current)
@@ -182,5 +189,5 @@ if __name__ == '__main__':
 
     print(ll.get(5))
 
-    ll.delete(3)
+    ll.delete(5)
     ll.print_list()
