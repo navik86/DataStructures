@@ -44,6 +44,36 @@ class DoubleLinkedList:
         self.counter += 1
         return self
 
+    # Удалить первый элемент
+    def remove(self):
+        if self.counter == 0:
+            return
+        elif self.counter == 1:
+            self.head = self.last = None
+        elif self.counter == 2:
+            self.head = None
+        else:
+            self.head = get_next(self.head)
+            set_prev(self.head, None)
+        self.counter -= 1
+        return self
+
+    # Удалить последний элемент
+    # def pop(self):
+    #     if self.head is None:
+    #         return
+    #     elif self.counter == 1:
+    #         self.head = self.last = None
+    #     elif self.counter == 2:
+    #         self.last = None
+    #     else:
+    #         current = self.head
+    #         while pair_second(pair_second(current)):
+    #             current = pair_second(current)
+    #         self.last = set_second(current, None)
+    #     self.counter -= 1
+    #     return self
+
     def print_dll(self):
         if self.counter == 0:
             return
@@ -59,9 +89,12 @@ if __name__ == '__main__':
     dll.push(1)
     dll.push(2)
     dll.push(3)
+    dll.print_dll()
+    print()
+
     dll.append(4)
+    dll.print_dll()
+    print()
 
-    # print(get_prev(dll.last))
-    # print(get_next(dll.last))
-
+    dll.remove()
     dll.print_dll()
