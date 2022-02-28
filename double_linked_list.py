@@ -59,20 +59,52 @@ class DoubleLinkedList:
         return self
 
     # Удалить последний элемент
-    # def pop(self):
-    #     if self.head is None:
-    #         return
-    #     elif self.counter == 1:
-    #         self.head = self.last = None
-    #     elif self.counter == 2:
-    #         self.last = None
-    #     else:
-    #         current = self.head
-    #         while pair_second(pair_second(current)):
-    #             current = pair_second(current)
-    #         self.last = set_second(current, None)
-    #     self.counter -= 1
-    #     return self
+    def pop(self):
+        if self.counter == 0:
+            return
+        elif self.counter == 1:
+            self.head = self.last = None
+        else:
+            self.last = get_prev(self.last)
+            set_next(self.last, None)
+        self.counter -= 1
+        return self
+
+    # Вставляет элемент в указанную позицию, отсчет
+    def insert(self, position, item):
+        # Проверка позиции
+        if position < 1:
+            return print("Invalid position!")
+        if position > self.counter:
+            return print("Position out of range")
+
+        new_pair = create_pair(item)
+
+        # C учетом смены ссылок head, last
+        if position == 1 and self.counter == 1:
+            self.head = new_pair
+            set_second(self.head, self.last)
+        elif position == 1 and self.counter > 1:
+            set_second(new_pair, self.head)
+            self.head = new_pair
+        elif position == 2 and self.counter == 2:
+            set_second(new_pair, self.last)
+            set_second(self.head, new_pair)
+        else:
+            current = self.head
+            while position:
+                position -= 1
+                if position == 1 and pair_second(current) is not None:
+                    set_second(new_pair, pair_second(current))
+                    set_second(current, new_pair)
+                    break
+                if position == 1 and pair_second(current) is None:
+                    set_second(new_pair, self.last)
+                    set_second(current, new_pair)
+                    pass
+                current = pair_second(current)
+            self.counter += 1
+        return self
 
     def print_dll(self):
         if self.counter == 0:
@@ -97,4 +129,8 @@ if __name__ == '__main__':
     print()
 
     dll.remove()
+    dll.print_dll()
+    print()
+
+    dll.pop()
     dll.print_dll()
