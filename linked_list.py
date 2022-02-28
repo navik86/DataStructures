@@ -101,7 +101,6 @@ class LinkedList:
                 if position == 1 and pair_second(current) is None:
                     set_second(new_pair, self.last)
                     set_second(current, new_pair)
-                    pass
                 current = pair_second(current)
             self.counter += 1
         return self

@@ -78,31 +78,42 @@ class DoubleLinkedList:
         if position > self.counter:
             return print("Position out of range")
 
-        new_pair = create_pair(item)
+        new_pair = create_dp(item)
 
         # C учетом смены ссылок head, last
         if position == 1 and self.counter == 1:
+            print('if')
             self.head = new_pair
-            set_second(self.head, self.last)
+            set_next(self.head, self.last)
+            set_prev(self.last, self.head)
         elif position == 1 and self.counter > 1:
-            set_second(new_pair, self.head)
+            print('elif1')
+            set_next(new_pair, self.head)
+            set_prev(self.head, new_pair)
             self.head = new_pair
         elif position == 2 and self.counter == 2:
-            set_second(new_pair, self.last)
-            set_second(self.head, new_pair)
+            print('elif2')
+            set_next(new_pair, self.last)
+            set_prev(self.last, new_pair)
+            set_next(self.head, new_pair)
+            set_prev(new_pair, self.head)
         else:
+            print('else')
             current = self.head
             while position:
                 position -= 1
-                if position == 1 and pair_second(current) is not None:
-                    set_second(new_pair, pair_second(current))
-                    set_second(current, new_pair)
+                if position == 1 and get_next(current) is not None:
+                    set_next(new_pair, get_next(current))
+                    set_prev(get_next(current), new_pair)
+                    set_next(current, new_pair)
+                    set_prev(new_pair, current)
                     break
-                if position == 1 and pair_second(current) is None:
-                    set_second(new_pair, self.last)
-                    set_second(current, new_pair)
-                    pass
-                current = pair_second(current)
+                if position == 1 and get_next(current) is None:
+                    set_next(new_pair, self.last)
+                    set_prev(self.last, new_pair)
+                    set_next(current, new_pair)
+                    set_prev(new_pair, current)
+                current = get_next(current)
             self.counter += 1
         return self
 
@@ -121,6 +132,8 @@ if __name__ == '__main__':
     dll.push(1)
     dll.push(2)
     dll.push(3)
+    dll.push(4)
+    dll.push(5)
     dll.print_dll()
     print()
 
@@ -133,4 +146,9 @@ if __name__ == '__main__':
     print()
 
     dll.pop()
+    dll.print_dll()
+
+    print()
+
+    dll.insert(4, 5)
     dll.print_dll()
