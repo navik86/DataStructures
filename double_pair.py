@@ -14,42 +14,55 @@ def create_dp(data):
     return DoublePair(a, b)
 
 
-def get_data(double_pair):
-    return pair_first(double_pair.data)
-
-
+# [... , ...] -> ref[... , ...]
 def get_ref_pair(double_pair):
     return double_pair.ref
 
 
-def get_prev(pair):
-    return prev
+# [data , ...] -> [... , ...]
+def get_data(double_pair):
+    return pair_first(double_pair.data)
 
 
-def get_next(pair):
-    return next
+# [... , ...] -> [prev , ...]
+def get_prev(double_pair):
+    return pair_first(double_pair.ref)
 
 
-def set_data(pair, data):
-    pair.a = data
+# [... , ...] -> [... , next]
+def get_next(double_pair):
+    return pair_second(double_pair.ref)
 
 
-def set_ref_pair(pair, ref):
-    pair.b = ref
+# [data, ...] -> [... , ...]
+def set_data(double_pair, data):
+    return set_first(double_pair.data, data)
 
 
-def set_prev(pair, prev):
-    pair.b.a = prev
+# [... , ref] - [... , ...]
+def set_ref_pair(double_pair, ref):
+    return set_second(double_pair.data, ref)
 
 
-def set_next(pair, next):
-    pair.b.b = next
+# [... , ...] -> [prev , ...]
+def set_prev(double_pair, prev):
+    set_second(double_pair.ref, prev)
+
+
+# [... , ...] -> [... , next]
+def set_next(double_pair, next):
+    set_first(double_pair.ref, next)
 
 
 if __name__ == '__main__':
 
     dp1 = create_dp(1)
+    dp2 = create_dp(2)
+    dp3 = create_dp(3)
 
-    print(get_data(dp1))
+    set_prev(dp2, dp1)
+    set_next(dp2, dp3)
+
+
 
 
