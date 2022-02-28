@@ -22,7 +22,7 @@ class DoubleLinkedList:
         return self
 
     def print_list(self):
-        if self.head is None:
+        if self.counter == 0:
             return
         current = self.head
         while get_next(current):
@@ -34,8 +34,10 @@ if __name__ == '__main__':
 
     dll = DoubleLinkedList()
     dll.push(1)
+    dll.push(2)
+    dll.push(3)
+    dll.push(4)
 
 
 
-
-    # dll.print_list()
+    dll.print_list()
