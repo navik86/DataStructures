@@ -32,6 +32,9 @@ class LinkedList:
         new_pair = create_pair(item)
         if self.head is None:
             self.head = self.last = new_pair
+        elif self.counter == 1:
+            set_second(self.head, new_pair)
+            self.last = new_pair
         else:
             set_second(self.last, new_pair)
             self.last = new_pair
