@@ -156,16 +156,6 @@ class LinkedList:
             current = pair_second(current)
             yield item_val
 
-    # def print_list(self):
-    #     current = self.head
-    #     last = None
-    #     while last != self.head:
-    #         while pair_second(current) != last:
-    #             current = pair_second(current)
-    #         last = current
-    #         print(last)
-    #         current = self.head
-
     def print_list(self):
         if self.head is None:
             return
