@@ -3,6 +3,9 @@ class Pair:
         self.a = a
         self.b = b
 
+    def __str__(self):
+        return f"{self.a} -> "
+
 
 def create_pair(a=None, b=None):
     return Pair(a, b)

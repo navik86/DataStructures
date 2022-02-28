@@ -1,4 +1,4 @@
-from obj_pair import *
+from pair import *
 
 
 # push, pop, append, prepend, (insert, delete, get) - по позиции
@@ -154,15 +154,23 @@ class LinkedList:
             current = pair_second(current)
             yield item_val
 
+    # def print_list(self):
+    #     current = self.head
+    #     last = None
+    #     while last != self.head:
+    #         while pair_second(current) != last:
+    #             current = pair_second(current)
+    #         last = current
+    #         print(last)
+    #         current = self.head
+
     def print_list(self):
+        if self.head is None:
+            return
         current = self.head
-        last = None
-        while last != self.head:
-            while pair_second(current) != last:
-                current = pair_second(current)
-            last = current
-            print(last)
-            current = self.head
+        while pair_second(current):
+            current = pair_second(current)
+            print(f'{pair_first(current)} -> ', end=' ')
 
 
 if __name__ == '__main__':
@@ -174,18 +182,23 @@ if __name__ == '__main__':
     ll.push(4)
     ll.push(5)
     ll.print_list()
+    print()
 
     ll.append(9)
     ll.print_list()
+    print()
 
     ll.remove()
     ll.print_list()
+    print()
 
     ll.pop()
     ll.print_list()
+    print()
 
     ll.insert(4, 6)
     ll.print_list()
+    print()
 
     print(ll.get(5))
 
