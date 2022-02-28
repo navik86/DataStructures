@@ -2,20 +2,20 @@ from obj_pair import *
 
 
 class DoublePair:
-    def __init__(self, a=None, b=None):
-        self.a = a
-        self.b = b
-
-    def __str__(self):
-        return f"{self.a}"
+    def __init__(self, data=None, ref=None):
+        self.data = data
+        self.ref = ref
 
 
-def create_dp(a):
-    return DoublePair(a, Pair())
+def create_dp(data):
+    a = create_pair(data)
+    b = create_pair()
+    return DoublePair(a, b)
 
 
-def get_data(pair):
-    return pair.a
+def get_data(double_pair):
+    print(double_pair.data)
+    print(double_pair.ref)
 
 
 def get_ref_pair(pair):
@@ -23,11 +23,11 @@ def get_ref_pair(pair):
 
 
 def get_prev(pair):
-    return pair.b.a
+    return prev
 
 
 def get_next(pair):
-    return pair.b.b
+    return next
 
 
 def set_data(pair, data):
@@ -44,5 +44,12 @@ def set_prev(pair, prev):
 
 def set_next(pair, next):
     pair.b.b = next
+
+
+if __name__ == '__main__':
+
+    dp1 = create_dp(1)
+
+    get_data(dp1)
 
 

@@ -4,7 +4,7 @@ class Pair:
         self.b = b
 
     def __str__(self):
-        return f"{self.a} -> "
+        return f"[{self.a}  "
 
 
 def create_pair(a=None, b=None):
