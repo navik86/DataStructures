@@ -210,7 +210,6 @@ if __name__ == '__main__':
     dll.print_dll()
 
     print()
-    print('get')
 
     print(dll.get(4))
 
