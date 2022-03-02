@@ -28,10 +28,7 @@ class LinkedList:
         if self.head is None:
             self.head = self.last = new_pair
         else:
-            if self.counter == 0:
-                set_second(self.head, new_pair)
-            else:
-                set_second(self.last, new_pair)
+            set_second(self.last, new_pair)
             self.last = new_pair
         self.counter += 1
         return self
@@ -42,10 +39,10 @@ class LinkedList:
         else:
             if self.counter == 0:
                 self.head = self.last = None
-            elif self.counter == 1:
-                self.head = self.last
             else:
                 self.head = pair_second(self.head)
+                if self.counter == 1:
+                    self.head = self.last
         self.counter -= 1
 
     def pop(self):
@@ -71,12 +68,7 @@ class LinkedList:
 
         # Binding head, last
         if position == 0:
-            if self.counter == 0:
-                self.head = new_pair
-                set_second(self.head, self.last)
-            else:
-                set_second(new_pair, self.head)
-                self.head = new_pair
+            self.push(item)
         else:
             current = self.head
             while position:
@@ -100,12 +92,7 @@ class LinkedList:
 
         # Binding head, last
         if position == 0:
-            if self.counter == 0:
-                self.head = self.last = None
-            elif self.counter == 1:
-                self.head = self.last
-            else:
-                self.remove()
+            self.remove()
         else:
             current = self.head
             prev = self.head
@@ -117,7 +104,8 @@ class LinkedList:
                 prev = current
                 current = pair_second(current)
             set_second(prev, pair_second(current))
-            self.last = prev
+            if pair_second(current) is None:
+                self.last = prev
             self.counter -= 1
 
     def get(self, position):
@@ -140,8 +128,8 @@ class LinkedList:
             yield item_val
 
     def print_list(self):
-        if self.head is None:
-            return print('There is no data')
+        if self.counter == -1:
+            return print('There are no data')
         current = self.head
         while current:
             print(f'{pair_first(current)} -> ', end=' ')
@@ -182,15 +170,16 @@ if __name__ == '__main__':
     print(f'head {ll.head}')
     print(f'last {ll.last}')
 
+
     ll.insert(3, 6)
     ll.print_list()
     print()
 
-    print('Удалить 4 й')
+
     ll.delete(4)
     ll.print_list()
     print()
     print(f'head {ll.head}')
     print(f'last {ll.last}')
 
-    print(ll.get(3))
+    # print(ll.get(3))

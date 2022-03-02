@@ -1,110 +1,89 @@
 from double_pair import *
+from linked_list import *
 
 
 class DoubleLinkedList:
     def __init__(self):
         self.head = None
         self.last = None
-        self.counter = 0
+        self.counter = -1
 
-    # Добавление элемента в начало
     def push(self, item):
         new_pair = create_dp(item)
-        if self.counter == 0:
+        if self.counter == -1:
             self.head = self.last = new_pair
-        elif get_next(self.head) is None:
-            self.head = new_pair
-            set_next(self.head, self.last)
-            set_prev(self.last, self.head)
         else:
             set_next(new_pair, self.head)
+            set_prev(self.head, new_pair)
             self.head = new_pair
-            set_prev(new_pair, self.head)
+            if self.counter == 0:
+                set_next(self.head, self.last)
+                set_prev(self.last, self.head)
         self.counter += 1
-        return self
 
-    # Добавление элемента в начало
     def prepend(self, item):
         self.push(item)
         return self
 
-    # Добавление элемента в конец
     def append(self, item):
         new_pair = create_dp(item)
-        if self.counter == 0:
+        if self.head is None:
             self.head = self.last = new_pair
-        elif self.counter == 1:
-            set_next(self.head, new_pair)
-            self.last = new_pair
-            set_prev(self.last, self.head)
         else:
-            set_next(self.last, new_pair)
             set_prev(new_pair, self.last)
+            set_next(self.last, new_pair)
             self.last = new_pair
         self.counter += 1
-        return self
 
-    # Удалить первый элемент
     def remove(self):
-        if self.counter == 0:
+        if self.head is None:
             return
-        elif self.counter == 1:
-            self.head = self.last = None
-        elif self.counter == 2:
-            self.head = None
         else:
-            self.head = get_next(self.head)
-            set_prev(self.head, None)
+            if self.counter == 0:
+                self.head = self.last = None
+            else:
+                self.head = get_next(self.head)
+                set_prev(self.head, None)
+                if self.counter == 1:
+                    self.head = self.last
         self.counter -= 1
-        return self
 
-    # Удалить последний элемент
     def pop(self):
-        if self.counter == 0:
+        if self.head is None:
             return
-        elif self.counter == 1:
-            self.head = self.last = None
         else:
-            self.last = get_prev(self.last)
-            set_next(self.last, None)
-        self.counter -= 1
-        return self
+            if self.counter == 0:
+                self.head = self.last = None
+            else:
+                current = self.head
+                while get_next(get_next(current)):
+                    current = get_next(current)
+                self.last = current
+                set_next(current, None)
+            self.counter -= 1
 
-    # Вставляет элемент в указанную позицию, отсчет
     def insert(self, position, item):
-        # Проверка позиции
-        if position < 1:
+        if position < 0:
             return print("Invalid position!")
         if position > self.counter:
             return print("Position out of range")
 
         new_pair = create_dp(item)
 
-        # C учетом смены ссылок head, last
-        if position == 1 and self.counter == 1:
-            self.head = new_pair
-            set_next(self.head, self.last)
-            set_prev(self.last, self.head)
-        elif position == 1 and self.counter > 1:
-            set_next(new_pair, self.head)
-            set_prev(self.head, new_pair)
-            self.head = new_pair
-        elif position == 2 and self.counter == 2:
-            set_next(new_pair, self.last)
-            set_prev(self.last, new_pair)
-            set_next(self.head, new_pair)
-            set_prev(new_pair, self.head)
+        # Binding head, last
+        if position == 0:
+            self.push(item)
         else:
             current = self.head
             while position:
                 position -= 1
-                if position == 1 and get_next(current) is not None:
+                if position == 0 and get_next(current) is not None:
                     set_next(new_pair, get_next(current))
                     set_prev(get_next(current), new_pair)
                     set_next(current, new_pair)
                     set_prev(new_pair, current)
                     break
-                if position == 1 and get_next(current) is None:
+                if position == 0 and get_next(current) is None:
                     set_next(new_pair, self.last)
                     set_prev(self.last, new_pair)
                     set_next(current, new_pair)
@@ -113,49 +92,36 @@ class DoubleLinkedList:
             self.counter += 1
         return self
 
-    # Удаление позиции
     def delete(self, position):
-        if position < 1:
+        if position < 0:
             return print("Invalid position!")
         if position > self.counter:
             return print("Position out of range")
 
-        # C учетом смены ссылок head, last
-        if position == 1 and self.counter == 1:
-            self.head = self.last = None
-        elif position == 1 and self.counter == 2:
-            self.head = self.last
-            set_next(self.head, None)
-            set_prev(self.last, None)
-        elif position == 2 and self.counter == 2:
-            set_next(self.head, None)
-            self.last = self.head
-            set_prev(self.last, None)
-        elif position == self.counter:
-            self.pop()
-        elif position == 1:
+        # Binding head, last
+        if position == 0:
             self.remove()
         else:
             current = self.head
             prev = self.head
-            while position - 1:
+            while position:
+                if position == 1 and self.counter == 1:
+                    set_next(self.head, None)
+                    self.last = self.head
                 position -= 1
                 prev = current
                 current = get_next(current)
             set_next(prev, get_next(current))
             set_prev(get_next(current), prev)
-            set_second(current, None)
             self.counter -= 1
-        return self
 
-    # Получение элемента
     def get(self, position):
-        if position < 1:
+        if position < 0:
             return print("Invalid position!")
         if position > self.counter:
             return print("Position out of range")
         current = self.head
-        while position:
+        while position !=-1:
             item = current
             current = get_next(current)
             position -= 1
@@ -165,15 +131,15 @@ class DoubleLinkedList:
         current = self.head
         while current:
             item_val = current
-            current = set_next(current)
+            current = get_next(current)
             yield item_val
 
-    def print_dll(self):
-        if self.counter == 0:
-            return
+    def print_list(self):
+        if self.counter == -1:
+            return print('There are no data')
         current = self.head
         while current:
-            print(f'{get_data(current)}', end=' ')
+            print(f'{get_data(current)} -> ', end=' ')
             current = get_next(current)
 
 
@@ -185,31 +151,41 @@ if __name__ == '__main__':
     dll.push(3)
     dll.push(4)
     dll.push(5)
-    dll.print_dll()
+    dll.print_list()
     print()
 
-    dll.append(4)
-    dll.print_dll()
+    dll.append(0)
+    dll.print_list()
     print()
 
     dll.remove()
-    dll.print_dll()
+    dll.print_list()
     print()
+
+    # print(get_next(dll.last))
+    # print(get_prev(dll.last))
 
     dll.pop()
-    dll.print_dll()
-
+    dll.print_list()
     print()
 
-    dll.insert(4, 5)
-    dll.print_dll()
-
+    dll.insert(1, 9)
+    dll.print_list()
     print()
 
-    dll.delete(5)
-    dll.print_dll()
+    # print(get_prev(dll.head))
+    # print(get_next(dll.head))
+    # print(get_prev(dll.last))
+    # print(get_next(dll.last))
 
+    dll.delete(3)
+    dll.print_list()
     print()
 
-    print(dll.get(4))
+    # print(get_prev(dll.head))
+    # print(get_next(dll.head))
+    # print(get_prev(dll.last))
+    # print(get_next(dll.last))
+    # print(dll.last)
 
+    print(dll.get(3))
