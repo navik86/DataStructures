@@ -5,12 +5,12 @@ from double_pair import *
 class Stack:
     def __init__(self):
         self.top = None
-        self.size = 0
+        self.size = -1
 
     # [..], [..], [..] <- [..]
     def push(self, item):
         new_pair = create_dp(item)
-        if self.size == 0:
+        if self.size == -1:
             self.top = new_pair
         else:
             set_next(self.top, new_pair)
@@ -20,9 +20,9 @@ class Stack:
 
     # [..], [..], [..] -> [..]
     def pop(self):
-        if self.size == 0:
+        if self.size == -1:
             return
-        elif self.size == 1:
+        elif self.size == 0:
             self.top = None
         else:
             self.top = get_prev(self.top)

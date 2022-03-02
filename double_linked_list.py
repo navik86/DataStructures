@@ -135,3 +135,6 @@ class DoubleLinkedList:
         while current:
             print(f'{get_data(current)} -> ', end=' ')
             current = get_next(current)
+
+    def __iter__(self):
+        return iter(map(lambda x: (get_data(x)), self.iter_ll()))

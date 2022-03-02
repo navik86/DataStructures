@@ -131,3 +131,6 @@ class LinkedList:
         while current:
             print(f'{pair_first(current)} -> ', end=' ')
             current = pair_second(current)
+
+    def __iter__(self):
+        return iter(map(lambda x: pair_first(x), self.iter_ll()))
