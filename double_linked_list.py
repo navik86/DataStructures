@@ -1,5 +1,4 @@
 from double_pair import *
-from linked_list import *
 
 
 class DoubleLinkedList:
@@ -83,11 +82,6 @@ class DoubleLinkedList:
                     set_next(current, new_pair)
                     set_prev(new_pair, current)
                     break
-                if position == 0 and get_next(current) is None:
-                    set_next(new_pair, self.last)
-                    set_prev(self.last, new_pair)
-                    set_next(current, new_pair)
-                    set_prev(new_pair, current)
                 current = get_next(current)
             self.counter += 1
         return self
@@ -141,51 +135,3 @@ class DoubleLinkedList:
         while current:
             print(f'{get_data(current)} -> ', end=' ')
             current = get_next(current)
-
-
-if __name__ == '__main__':
-
-    dll = DoubleLinkedList()
-    dll.push(1)
-    dll.push(2)
-    dll.push(3)
-    dll.push(4)
-    dll.push(5)
-    dll.print_list()
-    print()
-
-    dll.append(0)
-    dll.print_list()
-    print()
-
-    dll.remove()
-    dll.print_list()
-    print()
-
-    # print(get_next(dll.last))
-    # print(get_prev(dll.last))
-
-    dll.pop()
-    dll.print_list()
-    print()
-
-    dll.insert(1, 9)
-    dll.print_list()
-    print()
-
-    # print(get_prev(dll.head))
-    # print(get_next(dll.head))
-    # print(get_prev(dll.last))
-    # print(get_next(dll.last))
-
-    dll.delete(3)
-    dll.print_list()
-    print()
-
-    # print(get_prev(dll.head))
-    # print(get_next(dll.head))
-    # print(get_prev(dll.last))
-    # print(get_next(dll.last))
-    # print(dll.last)
-
-    print(dll.get(3))

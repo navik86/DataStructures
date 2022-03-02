@@ -77,9 +77,6 @@ class LinkedList:
                     set_second(new_pair, pair_second(current))
                     set_second(current, new_pair)
                     break
-                if position == 0 and pair_second(current) is None:
-                    set_second(new_pair, self.last)
-                    set_second(current, new_pair)
                 current = pair_second(current)
             self.counter += 1
         return self
@@ -134,52 +131,3 @@ class LinkedList:
         while current:
             print(f'{pair_first(current)} -> ', end=' ')
             current = pair_second(current)
-
-
-if __name__ == '__main__':
-
-    ll = LinkedList()
-    ll.push(1)
-    ll.push(2)
-    ll.push(3)
-    ll.push(4)
-    ll.push(5)
-
-    ll.print_list()
-    print()
-
-    print('Добавление в конец')
-    ll.append(9)
-
-    ll.print_list()
-    print()
-    print(f'head {ll.head}')
-    print(f'last {ll.last}')
-
-    print('Удалить первый')
-    ll.remove()
-    ll.print_list()
-    print()
-    print(f'head {ll.head}')
-    print(f'last {ll.last}')
-
-    print('Удалить последний')
-    ll.pop()
-    ll.print_list()
-    print()
-    print(f'head {ll.head}')
-    print(f'last {ll.last}')
-
-
-    ll.insert(3, 6)
-    ll.print_list()
-    print()
-
-
-    ll.delete(4)
-    ll.print_list()
-    print()
-    print(f'head {ll.head}')
-    print(f'last {ll.last}')
-
-    # print(ll.get(3))
