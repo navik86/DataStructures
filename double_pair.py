@@ -1,40 +1,32 @@
 from obj_pair import *
 
-
-class DoublePair:
-    def __init__(self, data=None, ref=None):
-        self.data = data
-        self.ref = ref
-
-    def __str__(self):
-        return f"{self.data}"
+# class DoublePair:
+#     def __init__(self, data=None, ref=None):
+#         self.data = data
+#         self.ref = ref
+#
+#     def __str__(self):
+#         return f"{self.data}"
 
 
 def create_dp(data):
-    a = create_pair(data)
-    b = create_pair()
-    pair_second(b)
-    return DoublePair(a, b)
+    links = create_pair()
+    return Pair(data, links)
 
 
-# [... , ...] -> ref[... , ...]
-def get_ref_pair(double_pair):
-    return double_pair.ref
-
-
-# [data , ...] -> [... , ...]
+# [data, [... , ...]]
 def get_data(double_pair):
-    return pair_first(double_pair.data)
+    return pair_first(double_pair)
 
 
-# [... , ...] -> [prev , ...]
+# [..., [prev, ...]]
 def get_prev(double_pair):
-    return pair_first(double_pair.ref)
+    return pair_first(pair_second(double_pair))
 
 
-# [... , ...] -> [... , next]
+# [..., [..., next]]
 def get_next(double_pair):
-    return pair_second(double_pair.ref)
+    return pair_second(pair_second(double_pair))
 
 
 # [data, ...] -> [... , ...]
