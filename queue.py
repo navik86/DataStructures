@@ -1,19 +1,22 @@
 from linked_list import *
 
 
-
-def enqueue(, item):
-    return self
-
+def create_queue():
+    return LinkedList()
 
 
-def dequeue():
+def enqueue(queue, item):
+    queue.push(item)
 
 
+def dequeue(queue):
+    queue.pop()
 
-def front(self):
-    return self.head
+
+def front(queue):
+    return queue.head
 
 
-def rear(self):
-    return self.last
+def rear(queue):
+    return queue.last
+
