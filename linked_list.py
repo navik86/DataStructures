@@ -134,3 +134,4 @@ class LinkedList:
 
     def __iter__(self):
         return iter(map(lambda x: pair_first(x), self.iter_ll()))
+

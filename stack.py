@@ -1,42 +1,18 @@
-from double_pair import *
+from linked_list import *
 
 
 # push, pop, empty, size, top
-class Stack:
+class MyStack:
     def __init__(self):
-        self.top = None
-        self.size = -1
+        self.ll = LinkedList()
 
     # [..] -> [..], [..], [..]
     def push(self, item):
-        new_pair = create_dp(item)
-        if self.size == -1:
-            self.top = new_pair
-        else:
-            set_next(self.top, new_pair)
-            set_prev(new_pair, self.top)
-            self.top = new_pair
-        self.size += 1
+        self.ll.push(item)
 
     # [..] <- [..], [..], [..]
     def pop(self):
-        if self.size == -1:
-            return
-        else:
-            if self.size == 0:
-                self.top = None
-            else:
-                self.top = get_prev(self.top)
-                set_next(self.top, None)
-        self.size -= 1
-
-    def print_stack(self):
-        if self.size == -1:
-            return
-        current = self.top
-        while current:
-            print(f'{get_data(current)} -> ', end=' ')
-            current = get_prev(current)
+        self.ll.remove()
 
     def empty(self):
         if self.size == -1:
@@ -44,12 +20,15 @@ class Stack:
         else:
             return False
 
-    def iter_st(self):
-        current = self.top
-        while current:
-            item_val = current
-            current = get_prev(current)
-            yield item_val
+    def size(self):
+        a = self.ll.counter + 1
+        return a
+
+    def top(self):
+        return self.ll.head
 
     def __iter__(self):
-        return iter(map(lambda x: (get_data(x)), self.iter_st()))
+        return self.ll.__iter__()
+
+
+
