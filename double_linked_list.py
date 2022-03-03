@@ -64,7 +64,7 @@ class DoubleLinkedList:
     def insert(self, position, item):
         if position < 0:
             return print("Invalid position!")
-        if position > self.counter:
+        if position > self.counter and position != 0:
             return print("Position out of range")
 
         new_pair = create_dp(item)
