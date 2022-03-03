@@ -106,7 +106,10 @@ class DoubleLinkedList:
                 prev = current
                 current = get_next(current)
             set_next(prev, get_next(current))
-            set_prev(get_next(current), prev)
+            if get_next(current) is None:
+                self.last = prev
+            else:
+                set_prev(get_next(current), prev)
             self.counter -= 1
 
     def get(self, position):
