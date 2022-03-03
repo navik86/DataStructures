@@ -124,7 +124,7 @@ class DoubleLinkedList:
             position -= 1
         return item
 
-    def iter_ll(self):
+    def iter_dll(self):
         current = self.head
         while current:
             item_val = current
@@ -140,4 +140,4 @@ class DoubleLinkedList:
             current = get_next(current)
 
     def __iter__(self):
-        return iter(map(lambda x: (get_data(x)), self.iter_ll()))
+        return iter(map(lambda x: (get_data(x)), self.iter_dll()))

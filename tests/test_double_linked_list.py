@@ -104,13 +104,13 @@ class LinkedListTestCase(TestCase):
         d = pair_first(dll.get(2))
         assert d == 1
 
-    def test_iter_ll(self):
+    def test_iter_dll(self):
 
         dll = DoubleLinkedList()
         dll.push(1)
         dll.push(2)
         dll.push(3)
 
-        a = [pair_first(x) for x in dll.iter_ll()]
+        a = [pair_first(x) for x in dll.iter_dll()]
         assert a == [3, 2, 1]
 
