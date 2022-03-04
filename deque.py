@@ -7,11 +7,11 @@ class MyDeque:
     def __init__(self):
         self.dll = DoubleLinkedList()
 
-    # [..] -> [front], [..], [..], [rear]
+    # [new] -> [front], [..], [..], [rear]
     def insertFront(self, item):
         self.dll.push(item)
 
-    # [front], [..], [..], [rear] <- [..]
+    # [front], [..], [..], [rear] <- [new]
     def insertRear(self, item):
         self.dll.append(item)
 
@@ -36,3 +36,6 @@ class MyDeque:
     def size(self):
         a = self.dll.counter + 1
         return a
+
+    def __iter__(self):
+        return self.dll.__iter__()

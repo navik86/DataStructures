@@ -12,10 +12,7 @@ def pair_second(pair):
 
 def set_first(pair, first):
     pair[0] = first
-    return pair
 
 
 def set_second(pair, second):
     pair[1] = second
-    return pair
-

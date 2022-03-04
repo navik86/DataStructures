@@ -34,9 +34,3 @@ def set_prev(double_pair, prev):
 # [..., [..., next]]
 def set_next(double_pair, next):
     return set_second(pair_second(double_pair), next)
-
-
-
-
-
-

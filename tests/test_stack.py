@@ -1,6 +1,5 @@
 from unittest import TestCase
 from stack import *
-from double_pair import *
 
 
 class StackTestCase(TestCase):
