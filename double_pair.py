@@ -23,14 +23,14 @@ def get_next(double_pair):
 
 # [data, [... , ...]]
 def set_data(double_pair, data):
-    return set_first(double_pair, data)
+    set_first(double_pair, data)
 
 
 # [..., [prev, ...]]
 def set_prev(double_pair, prev):
-    return set_first(pair_second(double_pair), prev)
+    set_first(pair_second(double_pair), prev)
 
 
 # [..., [..., next]]
 def set_next(double_pair, next):
-    return set_second(pair_second(double_pair), next)
+    set_second(pair_second(double_pair), next)
