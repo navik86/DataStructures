@@ -4,7 +4,10 @@ class Node:
     def __init__(self, key):
         self.left = None
         self.right = None
-        self.val = key
+        self.key = key
+
+    def __repr__(self):
+        return f"{self.key}"
 
 
 # Вставки нового узла с заданным ключом
@@ -17,7 +20,6 @@ def insert(node, key):
         node.left = insert(node.left, key)
     else:
         node.right = insert(node.right, key)
-
     return node
 
 
@@ -30,26 +32,30 @@ def deleteNode(root, key):
     if key < root.key:
         root.left = deleteNode(root.left, key)
         return root
-
-    elif (key > root.key):
+    elif key > root.key:
         root.right = deleteNode(root.right, key)
         return root
 
+    # Достигли удаляемого узла
+
+    # Если элемент это лист
     if root.left is None and root.right is None:
         return None
 
+    # Если есть один потомок
     if root.left is None:
         temp = root.right
         root = None
         return temp
-
     elif root.right is None:
         temp = root.left
         root = None
         return temp
 
+    # Если оба потомка
     succParent = root
 
+    # Поиск приемника
     succ = root.right
 
     while succ.left:
@@ -61,40 +67,26 @@ def deleteNode(root, key):
     else:
         succParent.right = succ.right
 
+    # Копируем данные приемника
     root.key = succ.key
-
     return root
 
 
 def search(root, key):
 
-    if root is None or root.val == key:
+    if root is None or root.key == key:
         return root
 
-    if root.val < key:
+    if root.key < key:
         return search(root.right, key)
 
     return search(root.left, key)
 
 
 def print_tree(root):
-    if root is not None:
+    if root:
         print_tree(root.left)
         print(root.key, end=" ")
         print_tree(root.right)
 
-
-if __name__ == '__main__':
-
-
-    root = None
-    root = insert(root, 50)
-    # root = insert(root, 30)
-    # root = insert(root, 20)
-    # root = insert(root, 40)
-    # root = insert(root, 70)
-    # root = insert(root, 60)
-    # root = insert(root, 80)
-
-    # print_tree(root)
 

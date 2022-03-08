@@ -2,7 +2,7 @@ from unittest import TestCase
 from heap import *
 
 
-class StackTestCase(TestCase):
+class HeapTestCase(TestCase):
 
     def test_create_heap(self):
         ln1 = MyObject(1)
