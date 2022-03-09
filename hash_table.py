@@ -38,16 +38,3 @@ def display_hash(hash_table):
             print("-->", end=" ")
             print(j, end=" ")
         print()
-
-
-if __name__ == '__main__':
-
-    p1 = Person('Ivan')
-    p2 = Person('Oleg')
-    p3 = Person('Elena')
-
-    insert(hash_table, p1, p1)
-    insert(hash_table, p2, p2)
-    insert(hash_table, p3, p3)
-
-    display_hash(hash_table)
