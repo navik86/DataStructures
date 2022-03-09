@@ -13,16 +13,20 @@ class Person:
     def __eq__(self, person_obj):
         return isinstance(person_obj, Person) and self.name == person_obj.name
 
+    def __repr__(self):
+        return f"{self.name}"
+
 
 hash_table = [[] for _ in range(10)]
 
 
-def Hashing(keyvalue):
-    return keyvalue % len(hash_table)
+# hash function
+def hashing(keyvalue):
+    return hash(keyvalue) % len(hash_table)
 
 
 def insert(hash_table, keyvalue, value):
-    hash_key = Hashing(keyvalue)
+    hash_key = hashing(keyvalue)
     hash_table[hash_key].append(value)
 
 
@@ -39,4 +43,11 @@ def display_hash(hash_table):
 if __name__ == '__main__':
 
     p1 = Person('Ivan')
-    print(dir(p1))
+    p2 = Person('Oleg')
+    p3 = Person('Elena')
+
+    insert(hash_table, p1, p1)
+    insert(hash_table, p2, p2)
+    insert(hash_table, p3, p3)
+
+    display_hash(hash_table)
