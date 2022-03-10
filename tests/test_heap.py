@@ -19,9 +19,9 @@ class HeapTestCase(TestCase):
         my_heap2 = MyHeap(list_int)
         my_heap3 = MyHeap(list_str)
 
-        assert my_heap._data[0] == ln1
-        assert my_heap2._data[0] == 2
-        assert my_heap3._data[0] == 'Elena'
+        assert my_heap.data[0] == ln1
+        assert my_heap2.data[0] == 2
+        assert my_heap3.data[0] == 'Elena'
 
     def test_push(self):
 
@@ -40,13 +40,13 @@ class HeapTestCase(TestCase):
         my_heap2 = MyHeap(list_int)
         my_heap3 = MyHeap(list_str)
 
-        my_heap.push(ln6)
-        my_heap2.push(1)
-        my_heap3.push('Vladimir')
+        push(my_heap, ln6)
+        push(my_heap2, 1)
+        push(my_heap3, 'Vladimir')
 
-        assert my_heap._data[0] == ln1
-        assert my_heap2._data[0] == 1
-        assert my_heap3._data[0] == 'Elena'
+        assert my_heap.data[0] == ln1
+        assert my_heap2.data[0] == 1
+        assert my_heap3.data[0] == 'Elena'
 
     def test_pop(self):
 
@@ -68,14 +68,14 @@ class HeapTestCase(TestCase):
         # my_heap2 [2, 32, 23, 43, 53]
         # my_heap3 ['Elena', 'Ivan', 'Oleg', 'Natasha', 'Vlad']
 
-        my_heap.pop()
-        my_heap2.pop()
-        my_heap3.pop()
+        pop(my_heap)
+        pop(my_heap2)
+        pop(my_heap3)
 
         # my_heap [4, 9, 7, 15]
         # my_heap2 [23, 32, 53, 43]
         # my_heap3 ['Ivan', 'Natasha', 'Oleg', 'Vlad']
 
-        assert my_heap._data[0] == ln2
-        assert my_heap2._data[0] == 23
-        assert my_heap3._data[0] == 'Ivan'
+        assert my_heap.data[0] == ln2
+        assert my_heap2.data[0] == 23
+        assert my_heap3.data[0] == 'Ivan'
