@@ -6,55 +6,68 @@ class StackTestCase(TestCase):
 
     def test_insert_tree(self):
 
-        root = None
-        root = insert(root, 5)
-        assert root.key == 5
-        root = insert(root, 3)
-        assert root.left.key == 3
-        root = insert(root, 2)
-        assert root.left.left.key == 2
-        root = insert(root, 4)
-        assert root.left.right.key == 4
-        root = insert(root, 7)
-        assert root.right.key == 7
-        root = insert(root, 6)
-        assert root.right.left.key == 6
-        root = insert(root, 8)
-        assert root.right.right.key == 8
+        root = Node(10)
+        assert root.val == 10
+        insert(root, 5)
+        assert root.left.val == 5
+        insert(root, 6)
+        assert root.left.right.val == 6
+        insert(root, 12)
+        assert root.right.val == 12
+        insert(root, 11)
+        assert root.right.left.val == 11
+        insert(root, 14)
+        assert root.right.right.val == 14
 
-    def test_search(self):
+    def test_find_node_and_parent(self):
 
-        root = None
-        root = insert(root, 5)
-        root = insert(root, 3)
-        root = insert(root, 2)
-        root = insert(root, 4)
-        root = insert(root, 7)
-        root = insert(root, 6)
-        root = insert(root, 8)
+        root = Node(10)
+        insert(root, 5)
+        insert(root, 6)
+        insert(root, 12)
+        insert(root, 11)
+        insert(root, 14)
 
-        my_node = search(root, 6)
-        assert my_node.key == 6
+        finded_root, parent = find_node_and_parent(root, 12)
+        assert finded_root.val == 12
+        assert parent.val == 10
 
-        my_node2 = search(root, 2)
-        assert my_node2.key == 2
+    def test_get_min(self):
 
-        my_node3 = search(root, 8)
-        assert my_node3.key == 8
+        root = Node(10)
+        insert(root, 5)
+        insert(root, 6)
+        insert(root, 12)
+        insert(root, 11)
+        insert(root, 14)
 
-    def test_deleteNode(self):
+        assert get_min(root) == 5
 
-        root = None
-        root = insert(root, 5)
-        root = insert(root, 3)
-        root = insert(root, 2)
-        root = insert(root, 4)
-        root = insert(root, 7)
-        root = insert(root, 6)
-        root = insert(root, 8)
+    def test_get_max(self):
 
-        deleteNode(root, 6)
-        assert search(root, 6) == None
+        root = Node(10)
+        insert(root, 5)
+        insert(root, 6)
+        insert(root, 12)
+        insert(root, 11)
+        insert(root, 14)
 
-        deleteNode(root, 5)
-        assert search(root, 5) == None
+        assert get_max(root) == 14
+
+    def test_delete(self):
+
+        root = Node(10)
+        insert(root, 5)
+        insert(root, 6)
+        insert(root, 12)
+        insert(root, 11)
+        insert(root, 14)
+
+        delete(root, 12)
+
+        assert find_node_and_parent(root, 12) == 'Not found'
+
+        assert root.val > root.left.val
+        assert root.val < root.right.val
+        assert root.left.val < root.left.right.val
+        assert root.right.val < root.right.right.val
