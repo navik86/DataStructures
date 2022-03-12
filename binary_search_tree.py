@@ -176,25 +176,3 @@ def delete(root, val):
             insert(root, node)
 
     return 'Successfully deleted'
-
-
-if __name__ == '__main__':
-
-    root = Node(10)
-    print(root.val) # 10
-    insert(root, 5)
-    print(root.left.val) # 5
-    insert(root, 6)
-    print(root.val, root.left.val, root.left.right.val) # 6
-    insert(root, 12)
-    print(root.val, root.right.val) # 12
-    insert(root, 11)
-    print(root.val, root.right.val, root.right.left.val) # 11
-    insert(root, 14)
-    print(root.right.right.val) # 14
-
-    print(find_node_and_parent(root, 14))
-
-    delete(root, 12)
-    print(root)
-    print(root.left, root.right)
